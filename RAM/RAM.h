@@ -11,14 +11,19 @@ using namespace std;
 class RAM
 {
 private:
-    // Min-heap to store processes: {priority, pid, steps}
+    // Min-heap to store processes: {priority, pid, steps}, Lower Number = Higher Priority
     priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>> process_queue;
     int total_process = 0;
     int max_process = 20;
 
+    int pid_counter = 0;
+
 public:
-    int add_process(int pid, int priority, int steps)
+    int add_process(int priority, int steps)
     {
+        int pid = pid_counter;
+        ++pid_counter;
+
         if (total_process <= max_process)
         {
             process_queue.push({priority, pid, steps}); // Adds a process to RAM (priority queue)
@@ -40,6 +45,7 @@ public:
         {
             auto process = process_queue.top();
             process_queue.pop();
+            --total_process;
             return process;
         }
         return {-1, -1, -1}; // No process left

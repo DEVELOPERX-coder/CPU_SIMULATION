@@ -34,7 +34,7 @@ public:
         {
             if (request[i] > available[i])
             {
-                cout << "Process " << processID << " wautubg fir resiyrces.\n";
+                cout << "Process " << processID << " waiting for resources." << endl;
                 return false;
             }
         }
@@ -45,7 +45,7 @@ public:
             allocated[i] += request[i];
         }
 
-        cout << "Process " << processID << " allocated resources successfully.\n";
+        cout << "Process " << processID << " allocated resources successfully." << endl;
         return true;
     }
 
@@ -59,7 +59,8 @@ public:
             allocated[i] -= release[i];
         }
 
-        cout << "Process " << processID << " released resources/\n";
+        cout << "Process " << processID << " released resources" << endl
+             << endl;
         cv.notify_all();
     }
 
